@@ -1,0 +1,32 @@
+{% extends 'accounts/base.html' %}
+{% load static  %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+     <div class="col-sm-12">
+        <h3 class=" page_headings my-5 text-center">Login Page</h3>
+     </div>
+     <div class="container text-left justify-content-center align-items-center" style="height: 10vh; width: 50%;">
+      {% if messages %}
+         {% for message in messages %}
+         <small {% if message.tags %} class="alert alert-{{message.tags}} my-5" {% endif %}>{{message}}</small>
+         {% endfor %}
+      {% endif %}
+      
+      {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+      <small class="alert alert-danger my-5">{{error}}</small>
+      {% endfor %}
+      {% endif %}
+   <form action="" method="POST" novalidate>
+      {% csrf_token %}
+      {% for fd in form %}
+         <div class="form-group">
+            {{fd.label_tag}} {{fd}} <small class="text-warning">{{fd.errors|striptags}}</small> <br>
+         </div>
+      {% endfor %}
+      <input type="submit" value="Login" class="btn btn-primary">
+   </form>
+     </div>
+{% endblock content %}

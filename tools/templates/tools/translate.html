@@ -1,0 +1,54 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}
+Language Translation
+{% endblock title %}
+
+{% block msg %}
+    {% if messages %}
+        {% for message in messages %}
+        <small {% if message.tags %} class="alert alert-{{message.tags}} my-5" {% endif %}>{{message}}</small><br>
+        {% endfor %}
+    {% endif %}
+{% endblock msg %}
+
+{% block content %}
+<div class="container" >
+    <h2 class=" page_headings my-5 text-center">Language Translation</h2>
+    <form method="post" class="mt-5 form-control">
+        <div class="row">
+            <div class="col-sm-5">
+                {% csrf_token %}
+                <label for="source_lang">Source Language:</label>
+                <select name="source_lang" id="source_lang">
+                    <option value="en" {% if source_lang == 'en' %}selected{% endif %}>English</option>
+                    <option value="es" {% if source_lang == 'es' %}selected{% endif %}>Spanish</option>
+                    <option value="fr" {% if source_lang == 'fr' %}selected{% endif %}>French</option>
+                    <option value="ur" {% if source_lang == 'ur' %}selected{% endif %}>Urdu</option>
+                    <option value="ar" {% if source_lang == 'ar' %}selected{% endif %}>Arabic</option>
+                    <!-- Add more languages as needed -->
+                </select>
+                <br>
+                <label for="source_text">Source Text:</label>
+                <textarea name="source_text" id="source_text" style="width: 100%; height: 200px;" required>{{ source_text }}</textarea>
+                <br>
+                <button type="submit" class="btn btn-primary">Translate</button>
+            </div>
+            <div class="col-sm-6 offset-1">
+                <label for="dest_lang">Destination Language:</label>
+                <select name="dest_lang" id="dest_lang">
+                    <option value="ur" {% if dest_lang == 'ur' %}selected{% endif %}>Urdu</option>
+                    <option value="es" {% if dest_lang == 'es' %}selected{% endif %}>Spanish</option>
+                    <option value="fr" {% if dest_lang == 'fr' %}selected{% endif %}>French</option>
+                    <option value="en" {% if dest_lang == 'en' %}selected{% endif %}>English</option>
+                    <!-- Add more languages as needed -->                 
+                </select>
+                <br>
+                <label for="translated_text">Translated Text:</label>
+                <textarea id="translated_text" readonly style="width: 100%; height: 200px;">{{ translated_text }}</textarea>
+            </div>
+            <br>
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/my1.css' %}">
+</head>
+<body class="body_home">
+    <div class="container-fluid">
+        {% include "accounts/navbar.html" %}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                {% block msg %}
+                <p style="padding: 10px; text-align: center; color: rgba(248, 252, 247, 0.595);">Welcome to Tex tMaster</p>
+                {% endblock msg %}
+            </div>
+        </div>
+        <div class="row">
+            <main>
+                <section class="hero">
+                    <h1>Text Master</h1>
+                    <h1>AI-Driven Summarization, Detection, and Translation</h1>
+                    <!-- <p>-------------------------------------------------</p> -->
+                    <p>Text to Speech and Audio&Video Transcribe</p>
+                    <!-- <p>-------------------------------------------------</p> -->
+                    <button> <a style="text-decoration: none;"  href="{% url 'services_url' %}">Get Started</a></button>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="{% static 'accounts/js/jquery-full.js' %}"></script>
+    <script src="{% static 'accounts/js/popper.js' %}"></script>
+    <script src="{% static 'accounts/js/bootstrap.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}
+    Main
+{% endblock title %}
+
+{% block msg %}
+    {% if messages %}
+        {% for message in messages %}
+        <small {% if message.tags %} class="alert alert-{{message.tags}} my-5" {% endif %}>{{message}}</small><br>
+        {% endfor %}
+    {% endif %}
+{% endblock msg %}
+
+{% block content %}
+<main>
+    <section class="detection" >
+        <h2>Detect LLM Generated Text</h2>
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+            {% for fd in form %}
+               <div class="form-group">
+                   {{fd}} {{fd.errors|striptags}}<br>
+               </div>
+            {% endfor %}
+
+            <input type="submit" value="Analyse" class="btn btn-success">
+            <!-- <a href="{% url 'main_url' %}" class="btn btn-danger">Go Back</a> -->
+         </form>
+        {% if lbl != None and prob != None %}
+        <div class="results">
+            <div class="result">
+                <p>Predicted Label = {{lbl}}</p>
+            </div>
+            <div class="result">
+                <p>Predicted Probability = {{prob}} %</p>
+            </div>
+        </div>
+        <button class="btn btn-primary"><a style="text-decoration: none; color: antiquewhite;"  href="{% url 'contact_url' %}">Feedback</a></button>
+        {% endif %}
+    </section>
+</main>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'accounts/base.html' %}
+{% load static  %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+     <div class="profile_edit_view col-sm-8 offset-2 ">
+        <h2 class="my-5 text-center">View or Edit Your Profile</h2>
+     {% if messages %}
+         {% for message in messages %}
+            <small {% if message.tags %} class="alert alert-{{message.tags}} my-5" {% endif %}>{{message}}</small><br>
+         {% endfor %}
+      {% endif %}
+
+     <h3 class="my-5 text-center">Welcome! {{name}}</h3>
+     {% if users != None %}
+        <h5>List of Users</h5>
+        {% for usr in users %}
+           {{usr.username}} <br>
+        {% endfor %}
+     {% endif %}
+  <hr>
+
+  {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+         {{error}}
+      {% endfor %}
+      {% endif %}
+   <form action="" method="POST" novalidate>
+      {% csrf_token %}
+      {% for fd in form %}
+         {{fd.label_tag}} {{fd}} {{fd.errors|striptags}} <br><br>
+      {% endfor %}
+      <input class="profile_save_button" type="submit" value="Save">
+   </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}
+    Audio & Video Transcription
+{% endblock title %}
+
+{% block msg %}
+    {% if messages %}
+        {% for message in messages %}
+        <small {% if message.tags %} class="alert alert-{{message.tags}} my-5" {% endif %}>{{message}}</small><br>
+        {% endfor %}
+    {% endif %}
+{% endblock msg %}
+
+{% block content %}
+<div class="container">
+    <h2 class=" page_headings my-5 text-center">Audio & Video Transcription</h2>
+    <!-- <h2 class="text-center">Text Summarization</h2> -->
+    <br>
+    <form method="post" enctype="multipart/form-data" class="form-control">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if form.errors %}
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <button type="submit" class="btn btn-success">Transcribe File</button>
+    </form>
+
+    {% if file_url and transcription %}
+    <br><br>
+        <h2 class="text-center">Transcription Result</h2>
+        <div><p>{{ transcription }}</p></div>
+        <br>
+        <h2 class="text-center">Source File</h2>
+        {% if file_type in 'mp4 avi mov mkv' %}
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <video controls>
+                <source src="{{ file_url }}" type="video/{{ file_type }}" style="width: 400px; height: 600px;">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        {% else %}
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <audio controls>
+                <source src="{{ file_url }}" type="audio/{{ file_type }}">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock content %}

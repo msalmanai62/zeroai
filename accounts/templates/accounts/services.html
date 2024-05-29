@@ -1,0 +1,75 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}
+    Services
+{% endblock title %}
+
+{% block msg %}
+    {% if messages %}
+        {% for message in messages %}
+        <small {% if message.tags %} class="alert alert-{{message.tags}} my-5" {% endif %}>{{message}}</small><br>
+        {% endfor %}
+    {% endif %}
+{% endblock msg %}
+
+{% block content %}
+
+<h2 class=" page_headings text-center mt-4">Our Services</h2>
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Analyse Text</h5>
+                <p class="card-text">Analyze whether the text is human written or ai written</p>
+                <a href="{% url 'main_url' %}" class="btn btn-primary">Go to Analyse Text</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Audio/Video Transcribe</h5>
+                <p class="card-text">Convert audio and video content to text.</p>
+                <a href="{% url 'transcribe_url' %}" class="btn btn-primary">Go to Transcribe</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Text to Speech</h5>
+                <p class="card-text">Convert text into natural-sounding speech.</p>
+                <a href="{% url 'textToSpeech_url' %}" class="btn btn-primary">Go to Text to Speech</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Text Summarization</h5>
+                <p class="card-text">Summarize long texts into concise summaries.</p>
+                <a href="{% url 'summary_url' %}" class="btn btn-primary">Go to Summarization</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Language Translation</h5>
+                <p class="card-text">Translate text between different languages.</p>
+                <a href="{% url 'translate_url' %}" class="btn btn-primary">Go to Translation</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">More Services</h5>
+                <p class="card-text">We are adding some other AI Services. Stay Tuned with us 😃</p>
+                <a href="{% url 'services_url' %}" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

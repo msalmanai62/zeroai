@@ -1,0 +1,38 @@
+{% extends 'accounts/base.html' %}
+{% load static  %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block content %}
+<div class="col-sm-12">
+    <h3 class=" page_headings my-5 text-center">Contact Page</h3>
+ <div>
+
+<div class="container text-left justify-content-center align-items-center" style="height: 10vh; width: 50%;">
+
+    <div class="row mt-5">
+      
+        <form class="form-group">
+            <div class="form-group">
+                <label for="inputName">Your Name</label>
+                <input type="text" class="form-control"  id="inputName" />
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Your Email *</label>
+                <input type="email" class="form-control "  id="inputEmail" required />
+            </div>
+            <div class="form-group">
+                <label for="inputSubject">Subject</label>
+                <input type="text" class="form-control"  id="inputSubject" />
+            </div>
+            
+            <div class="">
+                <label for="inputTextArea">Your Message *</label>
+                <textarea style="height: 150px;" class="form-control " id="inputTextArea" required ></textarea>
+            </div>
+            <button class="btn btn-primary contact_submit_button" type="submit">Send</button>
+        </form>
+  </div>
+  </div>
+
+{% endblock content %}

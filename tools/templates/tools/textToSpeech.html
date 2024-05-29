@@ -1,0 +1,39 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}
+    Text To Speech
+{% endblock title %}
+
+{% block msg %}
+    {% if messages %}
+        {% for message in messages %}
+        <small {% if message.tags %} class="alert alert-{{message.tags}} my-5" {% endif %}>{{message}}</small><br>
+        {% endfor %}
+    {% endif %}
+{% endblock msg %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class=" page_headings my-5 text-center">Text-to-Speech</h2>
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+        {% for fd in form %}
+           <div class="form-group">
+               {{fd}} {{fd.errors|striptags}}<br>
+           </div>
+        {% endfor %}
+
+        <input type="submit" value="To Speech" class="btn btn-success">
+        <!-- <a href="{% url 'main_url' %}" class="btn btn-danger">Go Back</a> -->
+     </form>
+    {% if audio_file_url %}
+    <h3 class=" page_headings my-5 text-center">Generated Audio</h3>
+    <div style="display: flex; justify-content:center; align-items: center;">
+        <audio controls src="{{ audio_file_url }}" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+        
+    {% endif %}
+</div>
+{% endblock content %}
